@@ -15,7 +15,7 @@ unique = ["angry", "disgust", "fear", "happy", "neutral", "sad", "surprise"]
 
 def process_image(img_path):
     img = tf.constant(img_path)
-    img = tf.image.convert_image_dtype(img, tf.float32)
+#     img = tf.image.convert_image_dtype(img, tf.float32)
     img = tf.image.decode_jpeg(img, channels=channel)
     img = tf.image.resize(img, size=[img_size, img_size])
     return img
@@ -28,7 +28,6 @@ model = load_model("./models/facial-expression-v1/saved_model_3")
 def predict(img_arr):
     img = process_image(img_arr)
     # plt.imsave("./test.jpeg", img)
-
     img_array = tf.keras.preprocessing.image.img_to_array(img)
     img_array = tf.expand_dims(img_array, 0)
     prediction = model.predict(img_array)
