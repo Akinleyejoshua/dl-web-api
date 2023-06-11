@@ -9,7 +9,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 
 # Create your views here.
-img_size = 224
+img_size = 24
 channel = 1
 unique = ["angry", "disgust", "fear", "happy", "neutral", "sad", "surprise"]
 
