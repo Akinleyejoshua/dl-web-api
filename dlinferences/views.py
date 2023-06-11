@@ -15,6 +15,7 @@ unique = ["angry", "disgust", "fear", "happy", "neutral", "sad", "surprise"]
 def process_image(img):
     img = tf.constant(img)
     img = tf.image.convert_image_dtype(img, tf.float32)
+    img = tf.image.rgb_to_grayscale(img)
     img = tf.image.resize(img, size=[img_size, img_size])
     return img
 
