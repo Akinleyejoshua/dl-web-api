@@ -65,7 +65,7 @@ def facial_expression_analysis(request, *args, **kwargs):
             img = img.convert("RGB")
 
         image_np = np.array(img)
-        plt.imsave("test.jpeg", image_np)
+#         plt.imsave("test.jpeg", image_np)
     
         try:
             label, score, val = predict(image_np)
