@@ -13,8 +13,8 @@ img_size = 24
 channel = 1
 unique = ["angry", "disgust", "fear", "happy", "neutral", "sad", "surprise"]
 
-def process_image(img_path):
-    img = tf.constant(img_path)
+def process_image(img):
+    img = tf.constant(img)
     img = tf.image.decode_jpeg(img, channels=channel)
     img = tf.image.resize(img, size=[img_size, img_size])
     return img
@@ -34,17 +34,6 @@ def predict(img_arr):
     label = unique[np.argmax(prediction)]
     print(f"Prediction - {label} score - {np.max(score[0])}")
     return label, np.max(score[0]), np.argmax(prediction)
-
-def predict_v2(img_path):
-    img = tf.keras.preprocessing.image.load_img(img_path, target_size=(img_size, img_size))
-    img_array = tf.keras.preprocessing.image.img_to_array(img)
-    img_array = tf.expand_dims(img_array, 0)
-    prediction = model.predict(img_array)
-    score = tf.nn.softmax(prediction)
-    label = unique[prediction[0].argmax()]
-    print("Prediction: {} {:.2f}% accuracy".format(label, 100 * np.max(score)))
-    return label, np.max(score[0]), np.argmax(prediction)
-
 
 @api_view(["POST", "GET"])
 def facial_expression_analysis(request, *args, **kwargs):
@@ -67,7 +56,6 @@ def facial_expression_analysis(request, *args, **kwargs):
     
         try:
             label, score, val = predict(image_np)
-#             label, score, val = predict_v2("test.jpeg")
             return Response({"label": f"{label}", "score": f"{score}", "val": f"{val}"})
         except Exception as e:
             return Response({"msg": f"{e}",})
