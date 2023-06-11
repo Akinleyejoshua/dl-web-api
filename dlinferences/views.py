@@ -68,8 +68,8 @@ def facial_expression_analysis(request, *args, **kwargs):
 #         plt.imsave("test.jpeg", image_np)
     
         try:
-#             label, score, val = predict(image_np)
-            label, score, val = predict_v2("test.jpeg")
+            label, score, val = predict(image_np)
+#             label, score, val = predict_v2("test.jpeg")
             return Response({"label": f"{label}", "score": f"{score}", "val": f"{val}"})
         except Exception as e:
             return Response({"msg": f"{e}",})
