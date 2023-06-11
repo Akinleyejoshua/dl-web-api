@@ -10,4 +10,3 @@ numpy
 pillow
 matplotlib
 gunicorn
-python>=3.9.5
