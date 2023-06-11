@@ -46,7 +46,7 @@ def predict_v2(img_path):
     return label, np.max(score[0]), np.argmax(prediction)
 
 
-@api_view(["POST", "GET"])
+@api_view(["POST", "GET", "OPTIONS"])
 def facial_expression_analysis(request, *args, **kwargs):
     response = request.data
     if response == None:
