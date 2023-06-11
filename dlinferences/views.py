@@ -10,11 +10,13 @@ import matplotlib.pyplot as plt
 
 # Create your views here.
 img_size = 224
+channel = 1
 unique = ["angry", "disgust", "fear", "happy", "neutral", "sad", "surprise"]
 
 def process_image(img_path):
     img = tf.constant(img_path)
     img = tf.image.convert_image_dtype(img, tf.float32)
+    img = tf.image.decode_jpeg(img, channels=channel)
     img = tf.image.resize(img, size=[img_size, img_size])
     return img
 
