@@ -6,7 +6,6 @@ import os
 import base64
 import io
 from PIL import Image
-import matplotlib.pyplot as plt
 
 # Create your views here.
 img_size = 24
@@ -15,7 +14,7 @@ unique = ["angry", "disgust", "fear", "happy", "neutral", "sad", "surprise"]
 
 def process_image(img):
     img = tf.constant(img)
-    img = tf.image.decode_jpeg(img, channels=channel)
+    img = tf.image.convert_image_dtype(img, tf.float32)
     img = tf.image.resize(img, size=[img_size, img_size])
     return img
 
@@ -26,7 +25,6 @@ model = load_model("./models/facial-expression-v1/saved_model_3")
 
 def predict(img_arr):
     img = process_image(img_arr)
-    # plt.imsave("./test.jpeg", img)
     img_array = tf.keras.preprocessing.image.img_to_array(img)
     img_array = tf.expand_dims(img_array, 0)
     prediction = model.predict(img_array)
@@ -52,8 +50,7 @@ def facial_expression_analysis(request, *args, **kwargs):
             img = img.convert("RGB")
 
         image_np = np.array(img)
-#         plt.imsave("test.jpeg", image_np)
-    
+        
         try:
             label, score, val = predict(image_np)
             return Response({"label": f"{label}", "score": f"{score}", "val": f"{val}"})
