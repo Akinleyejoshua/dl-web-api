@@ -1,3 +1,4 @@
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 import tensorflow as tf
