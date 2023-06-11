@@ -1,9 +1,9 @@
+import os
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 import tensorflow as tf
 import numpy as np
-import os
 import base64
 import io
 from PIL import Image
