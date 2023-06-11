@@ -131,5 +131,5 @@ CORS_ALLOWED_ORIGINS = [
     "https://facialanalysis.netlify.app"
 ]
 CORS_EXPOSE_HEADERS = [
-    "",
+    "Access-Control-Allow-Origin",
 ]
