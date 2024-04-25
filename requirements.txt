@@ -11,4 +11,3 @@ pillow
 matplotlib
 gunicorn
 uvicorn
-mysite
